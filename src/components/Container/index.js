@@ -23,11 +23,26 @@ class Container extends Component {
   }
 
   handleRemove = id => {
-    console.log(id);
-    // this.setState({
-    //   ...this.state,
-    //   items: this.state.tasks.filter(t => t.id !== id)
-    // });
+    this.setState({
+      ...this.state,
+      items: this.state.items.filter(t => t.id !== id)
+    });
+  };
+
+  handleAdd = item => {
+    let max = 0;
+
+    for (var i = 0; i < this.state.items.length; i++) {
+      if (this.state.items[i].id > max) {
+        max = this.state.items[i].id;
+      }
+    }
+
+    item.id = max + 1;
+    this.setState({
+      ...this.state,
+      items: this.state.items.concat(item)
+    });
   };
 
   render() {
@@ -35,7 +50,16 @@ class Container extends Component {
       <Fragment>
         <h1>Supermarket List</h1>
         <CountItems items={this.state.items} />
-        <List items={this.state.items} handleRemove={this.handleRemove} />
+        <List
+          items={this.state.items}
+          handleRemove={this.handleRemove}
+          handleAdd={this.handleAdd}
+        />
+        <div>
+          <button onClick={() => this.handleAdd({ name: "TEST" })}>
+            Add item
+          </button>
+        </div>
       </Fragment>
     );
   }
