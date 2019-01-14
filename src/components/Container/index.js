@@ -107,10 +107,7 @@ class Container extends Component {
           <div className="title">{constants.TITLE_CONTAINER}</div>
           {showLoading ? this.renderLoading() : this.renderDataList()}
           <Fragment>
-            <button
-              className="button"
-              onClick={() => this.setState({ showModalAddItem: true })}
-            >
+            <button className="button" onClick={() => this.showModalAddItem()}>
               {constants.ADD_ITEM}
             </button>
           </Fragment>
