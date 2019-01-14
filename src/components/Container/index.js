@@ -89,18 +89,22 @@ class Container extends Component {
     );
   };
 
+  renderLoading = () => {
+    return (
+      <div className="divImg">
+        <img className="loading" src={loading} alt="Loading" />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div className="container">
         <div className="box">
           <div className="title">{constants.TITLE_CONTAINER}</div>
-          {this.state.showLoading ? (
-            <div className="divImg">
-              <img className="loading" src={loading} alt="Loading" />
-            </div>
-          ) : (
-            this.renderDataList()
-          )}
+          {this.state.showLoading
+            ? this.renderLoading()
+            : this.renderDataList()}
           <Fragment>
             <button
               className="button"
