@@ -1,7 +1,9 @@
-#Make a simple React application
+# Make a simple React application
+
 Create a React app that allows the user to make a supermarket list.
 
-##Specs:
+## Specs:
+
 The app has 3 sections:
 
 The item count (0)
@@ -13,7 +15,8 @@ Each element of the list (2) display the item text and also has a button with th
 When the list is empty, it should show a "List is empty" message.
 It's not posible to edit items in this version just add and remove.
 
-##Restrictions:
+## Restrictions:
+
 It must be a project created with create-eact-app. App must run with just npm/yarn start.
 Use just plain react (no state manager library).
 Persist items in memory, but prepare the app structure to add server-side comunication when needed. (i.e.: You must have an api.js file that expose functions to get all items, to add an item and to remove an item. These functions must return promises but internally can just add and remove items from an array in memory or save in local storage. You can also use the npm package delay to emulate async)
@@ -22,10 +25,16 @@ Use flexbox and plain CSS preferently (*).
 Try to implement the given design as similar as possible.
 *This means that can not use a UI library (like bootstrap) for this, but you can use a css preprocesor, css modules or styles-coponents if you like. Althought we recomend to just use the default configuration for styles that comes with create-react-app.
 
-##Installation
+## Installation
 
 - Clone this repository
 - Save and run `npm start`
 
-##Development
+## Development
+
 This project was develop in ReactJS for a SouthTeam's Challenge.
+
+## Author
+
+- Created by Federico Villa
+- If you have any doubt, suggestion or comment feel free to contact me at: fedevilla88@gmail.com
