@@ -8,15 +8,15 @@ const ListItem = ({ item, handleRemove }) => {
     <div className="item">
       <div className="name">{item.name}</div>
       <div className="deleteSpan">
-        <button
-          className="buttonDelete"
+        <img
+          className="delete"
+          src={deleteIcon}
+          alt="delete"
           onClick={() => {
             if (window.confirm("Are you sure you wish to delete this item?"))
               handleRemove(item.id);
           }}
-        >
-          <img className="delete" src={deleteIcon} alt="delete" />
-        </button>
+        />
       </div>
     </div>
   );
