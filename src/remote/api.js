@@ -4,17 +4,18 @@ export const getItems = () => {
 
 export const addItem = name => {
   const list = JSON.parse(localStorage.getItem("items")) || [];
-  let max = 0;
+  let maxId = 0;
 
   for (var i = 0; i < list.length; i++) {
-    if (list[i].id > max) {
-      max = list[i].id;
+    if (list[i].id > maxId) {
+      maxId = list[i].id;
     }
   }
 
-  let item = {};
-  item.id = max + 1;
-  item.name = name;
+  let item = {
+    id: maxId + 1,
+    name
+  };
 
   let listAux = list.concat(item);
   localStorage.setItem("items", JSON.stringify(listAux));

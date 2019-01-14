@@ -26,11 +26,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 36px;
+  font-weight: bold;
 }
 
 .button {
   background-color: #1daafc;
+  border: 4px solid #1daafc;
   color: white;
   border-radius: 4px;
   width: 100%;
@@ -38,7 +40,6 @@ body {
   margin-top: 15px;
   font-size: 15px;
   font-weight: bold;
-  border: 2px solid #1daafc;
   cursor: pointer;
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -47,86 +48,4 @@ body {
 .button:hover {
   border: 4px solid #4caf50;
   background-color: #4caf50;
-  color: white;
-}
-
-.actionButtonSave {
-  background-color: #89b68b;
-  color: white;
-  border-radius: 4px;
-  width: 70px;
-  height: 32px;
-  margin-top: 15px;
-  font-size: 15px;
-  border: 1px solid #89b68b;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-  float: right;
-}
-
-.actionButtonSave:hover {
-  border: 1px solid #4caf50;
-  background-color: #4caf50;
-  color: white;
-}
-
-.actionButtonEmpty {
-  background-color: #ccc;
-  color: white;
-  border-radius: 4px;
-  width: 70px;
-  height: 32px;
-  margin-top: 15px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  cursor: not-allowed;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-  float: right;
-}
-
-.actionButtonClose {
-  background-color: white;
-  color: black;
-  border-radius: 4px;
-  width: 70px;
-  height: 32px;
-  margin-top: 15px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s;
-}
-
-.actionButtonClose:hover {
-  border: 1px solid red;
-  background-color: red;
-  color: white;
-}
-
-h4 {
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  font-size: 20px;
-  font-weight: normal;
-}
-
-input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.containerModal {
-  padding: 0 20px 0 20px;
-  justify-content: center;
-  align-items: center;
 }

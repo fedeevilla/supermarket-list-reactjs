@@ -1,21 +1,29 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import "./CountItems.css";
+import * as constants from "./../../constants/constants";
 
-const CountItems = ({ items }) => {
+const renderCount = count => {
+  switch (count) {
+    case 0:
+      return constants.COUNT_0;
+    case 1:
+      return constants.COUNT_1;
+    default:
+      return count + constants.COUNT_N;
+  }
+};
+
+const CountItems = ({ count }) => {
   return (
-    <div className="text">
-      {items.length === 0 ? (
-        <h4>List is empty</h4>
-      ) : (
-        <h4>{items.length} ITEMS</h4>
-      )}
-    </div>
+    <Fragment>
+      <span className="count">{renderCount(count)}</span>
+    </Fragment>
   );
 };
 
 CountItems.propTypes = {
-  items: PropTypes.array.isRequired
+  count: PropTypes.number.isRequired
 };
 
 export default CountItems;

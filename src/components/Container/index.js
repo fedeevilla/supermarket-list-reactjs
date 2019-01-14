@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import CountItems from "./../CountItems";
 import List from "./../List";
-import ModalAdd from "./../ModalAdd";
+import ModalAddItem from "./../ModalAddItem";
 import "./Container.css";
+import * as constants from "./../../constants/constants";
 import { removeItem, getItems, addItem } from "../../remote/api";
 
 class Container extends Component {
@@ -12,7 +13,7 @@ class Container extends Component {
     this.state = {
       items: [],
       name: "",
-      showModal: false
+      showModalAddItem: false
     };
   }
 
@@ -26,77 +27,53 @@ class Container extends Component {
     this.setState({ items: removeItem(id) });
   };
 
-  handleAdd = () => {
+  handleAddItem = () => {
     this.setState({ items: addItem(this.state.name) });
-    this.hideModalAdd();
+    this.hideModalAddItem();
   };
 
-  showModalAdd = () => {
-    this.setState({ showModal: true });
+  showModalAddItem = () => {
+    this.setState({ showModalAddItem: true });
   };
 
-  hideModalAdd = () => {
-    this.setState({ showModal: false, name: "" });
+  hideModalAddItem = () => {
+    this.setState({
+      showModalAddItem: false,
+      name: ""
+    });
   };
 
   handleChange = event => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value });
   };
 
   render() {
     return (
       <div className="container">
         <div className="box">
-          <div className="title">Supermarket List</div>
-          <CountItems items={this.state.items} />
+          <div className="title">{constants.TITLE_CONTAINER}</div>
+          <CountItems count={this.state.items.length} />
           <List
             items={this.state.items}
             handleRemove={this.handleRemove}
             handleAdd={this.handleAdd}
           />
-          <div>
+          <Fragment>
             <button
               className="button"
-              onClick={() => this.setState({ showModal: true })}
+              onClick={() => this.setState({ showModalAddItem: true })}
             >
-              Add item
+              {constants.ADD_ITEM}
             </button>
-          </div>
-          <ModalAdd show={this.state.showModal}>
-            <div className="containerModal">
-              <h4>Add item</h4>
-
-              <div className="spanInput">
-                <input
-                  name="name"
-                  value={this.state.name}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div>
-                <button
-                  className="actionButtonClose"
-                  onClick={() => this.hideModalAdd()}
-                >
-                  Cancel
-                </button>
-                <button
-                  className={
-                    this.state.name.trim().length < 1
-                      ? "actionButtonEmpty"
-                      : "actionButtonSave"
-                  }
-                  onClick={() => this.handleAdd()}
-                  disabled={this.state.name.trim().length < 1}
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-          </ModalAdd>
+          </Fragment>
+          <ModalAddItem
+            show={this.state.showModalAddItem}
+            name={this.state.name}
+            handleChange={this.handleChange}
+            handleAddItem={this.handleAddItem}
+            hideModalAddItem={this.hideModalAddItem}
+          />
         </div>
       </div>
     );
