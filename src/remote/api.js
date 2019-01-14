@@ -15,7 +15,6 @@ export const addItem = name => {
 };
 
 export const removeItem = id => {
-  console.log(id);
   return new Promise(resolve => {
     setTimeout(function() {
       resolve(removeItemAPI(id));
