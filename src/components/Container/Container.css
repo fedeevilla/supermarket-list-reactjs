@@ -49,3 +49,15 @@ body {
   border: 4px solid #4caf50;
   background-color: #4caf50;
 }
+
+.divImg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  height: 133px;
+  width: 200px;
+}

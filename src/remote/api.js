@@ -1,8 +1,33 @@
 export const getItems = () => {
-  return JSON.parse(localStorage.getItem("items")) || [];
+  return new Promise(resolve => {
+    setTimeout(function() {
+      resolve(getItemsAPI());
+    }, 500);
+  });
 };
 
 export const addItem = name => {
+  return new Promise(resolve => {
+    setTimeout(function() {
+      resolve(addItemAPI(name));
+    }, 500);
+  });
+};
+
+export const removeItem = id => {
+  console.log(id);
+  return new Promise(resolve => {
+    setTimeout(function() {
+      resolve(removeItemAPI(id));
+    }, 500);
+  });
+};
+
+export const getItemsAPI = () => {
+  return JSON.parse(localStorage.getItem("items")) || [];
+};
+
+export const addItemAPI = name => {
   const list = JSON.parse(localStorage.getItem("items")) || [];
   let maxId = 0;
 
@@ -22,7 +47,7 @@ export const addItem = name => {
   return listAux;
 };
 
-export const removeItem = id => {
+export const removeItemAPI = id => {
   let listAux = JSON.parse(localStorage.getItem("items")).filter(
     t => t.id !== id
   );
