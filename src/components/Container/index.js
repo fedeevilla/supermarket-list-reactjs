@@ -42,9 +42,10 @@ class Container extends Component {
   };
 
   handleAddItem = () => {
+    const { name } = this.state;
     this.showLoading();
 
-    addItem(this.state.name).then(response =>
+    addItem(name).then(response =>
       this.setState({
         items: response,
         showLoading: false
@@ -77,11 +78,12 @@ class Container extends Component {
   };
 
   renderDataList = () => {
+    const { items } = this.state;
     return (
       <Fragment>
-        <CountItems count={this.state.items.length} />
+        <CountItems count={items.length} />
         <List
-          items={this.state.items}
+          items={items}
           handleRemove={this.handleRemove}
           handleAdd={this.handleAdd}
         />
@@ -98,13 +100,12 @@ class Container extends Component {
   };
 
   render() {
+    const { showLoading, showModalAddItem, name } = this.state;
     return (
       <div className="container">
         <div className="box">
           <div className="title">{constants.TITLE_CONTAINER}</div>
-          {this.state.showLoading
-            ? this.renderLoading()
-            : this.renderDataList()}
+          {showLoading ? this.renderLoading() : this.renderDataList()}
           <Fragment>
             <button
               className="button"
@@ -114,8 +115,8 @@ class Container extends Component {
             </button>
           </Fragment>
           <ModalAddItem
-            show={this.state.showModalAddItem}
-            name={this.state.name}
+            show={showModalAddItem}
+            name={name}
             handleChange={this.handleChange}
             handleAddItem={this.handleAddItem}
             hideModalAddItem={this.hideModalAddItem}
