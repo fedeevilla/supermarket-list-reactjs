@@ -15,44 +15,39 @@ class Container extends Component {
       items: [],
       name: "",
       showModalAddItem: false,
-      loading: false
+      showLoading: false
     };
   }
 
   componentDidMount() {
-    this.setState({
-      loading: true
-    });
+    this.showLoading();
+
     getItems().then(response =>
       this.setState({
         items: response,
-        loading: false
+        showLoading: false
       })
     );
   }
 
   handleRemove = id => {
-    this.setState({
-      loading: true
-    });
+    this.showLoading();
 
     removeItem(id).then(response =>
       this.setState({
         items: response,
-        loading: false
+        showLoading: false
       })
     );
   };
 
   handleAddItem = () => {
-    this.setState({
-      loading: true
-    });
+    this.showLoading();
 
     addItem(this.state.name).then(response =>
       this.setState({
         items: response,
-        loading: false
+        showLoading: false
       })
     );
 
@@ -75,6 +70,12 @@ class Container extends Component {
     this.setState({ [name]: value });
   };
 
+  showLoading = () => {
+    this.setState({
+      showLoading: true
+    });
+  };
+
   renderDataList = () => {
     return (
       <Fragment>
@@ -93,7 +94,7 @@ class Container extends Component {
       <div className="container">
         <div className="box">
           <div className="title">{constants.TITLE_CONTAINER}</div>
-          {this.state.loading ? (
+          {this.state.showLoading ? (
             <div className="divImg">
               <img className="loading" src={loading} alt="Loading" />
             </div>
