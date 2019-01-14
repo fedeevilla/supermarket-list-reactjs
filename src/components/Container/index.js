@@ -1,66 +1,104 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import CountItems from "./../CountItems";
 import List from "./../List";
+import ModalAdd from "./../ModalAdd";
+import "./Container.css";
+import { removeItem, getItems, addItem } from "../../remote/api";
 
 class Container extends Component {
   constructor() {
     super();
 
     this.state = {
-      items: []
+      items: [],
+      name: "",
+      showModal: false
     };
   }
 
   componentDidMount() {
     this.setState({
-      items: [
-        { id: 1, name: "FEDE" },
-        { id: 2, name: "COLO" },
-        { id: 3, name: "OSCAR" },
-        { id: 4, name: "SILVIA" }
-      ]
+      items: getItems()
     });
   }
 
   handleRemove = id => {
-    this.setState({
-      ...this.state,
-      items: this.state.items.filter(t => t.id !== id)
-    });
+    this.setState({ items: removeItem(id) });
   };
 
-  handleAdd = item => {
-    let max = 0;
+  handleAdd = () => {
+    this.setState({ items: addItem(this.state.name) });
+    this.hideModalAdd();
+  };
 
-    for (var i = 0; i < this.state.items.length; i++) {
-      if (this.state.items[i].id > max) {
-        max = this.state.items[i].id;
-      }
-    }
+  showModalAdd = () => {
+    this.setState({ showModal: true });
+  };
 
-    item.id = max + 1;
+  hideModalAdd = () => {
+    this.setState({ showModal: false, name: "" });
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
     this.setState({
-      ...this.state,
-      items: this.state.items.concat(item)
+      [name]: value
     });
   };
 
   render() {
     return (
-      <Fragment>
-        <h1>Supermarket List</h1>
-        <CountItems items={this.state.items} />
-        <List
-          items={this.state.items}
-          handleRemove={this.handleRemove}
-          handleAdd={this.handleAdd}
-        />
-        <div>
-          <button onClick={() => this.handleAdd({ name: "TEST" })}>
-            Add item
-          </button>
+      <div className="container">
+        <div className="box">
+          <div className="title">Supermarket List</div>
+          <CountItems items={this.state.items} />
+          <List
+            items={this.state.items}
+            handleRemove={this.handleRemove}
+            handleAdd={this.handleAdd}
+          />
+          <div>
+            <button
+              className="button"
+              onClick={() => this.setState({ showModal: true })}
+            >
+              Add item
+            </button>
+          </div>
+          <ModalAdd show={this.state.showModal}>
+            <div className="containerModal">
+              <h4>Add item</h4>
+
+              <div className="spanInput">
+                <input
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div>
+                <button
+                  className="actionButtonClose"
+                  onClick={() => this.hideModalAdd()}
+                >
+                  Cancel
+                </button>
+                <button
+                  className={
+                    this.state.name.trim().length < 1
+                      ? "actionButtonEmpty"
+                      : "actionButtonSave"
+                  }
+                  onClick={() => this.handleAdd()}
+                  disabled={this.state.name.trim().length < 1}
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </ModalAdd>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }

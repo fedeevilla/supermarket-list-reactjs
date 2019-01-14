@@ -1,15 +1,16 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
+import "./CountItems.css";
 
 const CountItems = ({ items }) => {
   return (
-    <Fragment>
+    <div className="text">
       {items.length === 0 ? (
         <h4>List is empty</h4>
       ) : (
         <h4>{items.length} ITEMS</h4>
       )}
-    </Fragment>
+    </div>
   );
 };
 
